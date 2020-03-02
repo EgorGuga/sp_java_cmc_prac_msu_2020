@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="timetable" default="make_db" basedir=".">
+	<property file="build.properties"/>
+
+	<target name="make_db">
+		<ant antfile="${db.dir}/build.xml"/>
+	</target>
+
+</project>

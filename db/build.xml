@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+	<project name="timetable_db" default="make_db" basedir=".">
+		<property file="build.properties" />
+
+		<target name="add_elems">
+			<sql classpath="${sql.classpath}"
+				 driver="${sql.driver}"
+				 url="${sql.url}"
+				 userid="${sql.user}"
+				 password="${sql.password}"
+				 src="${db.dir}/add_elems.sql"
+				 autocommit="True">
+			</sql>
+		</target>
+
+		<target name="create_db">
+			<sql classpath="${sql.classpath}"
+				 driver="${sql.driver}"
+				 url="${sql.url}"
+				 userid="${sql.user}"
+				 password="${sql.password}"
+				 src="${db.dir}/create_db.sql"
+				 autocommit="True">
+			</sql>
+		</target>
+
+		<target name="create_tables">
+			<sql classpath="${sql.classpath}"
+				 driver="${sql.driver}"
+				 url="${sql.url}"
+				 userid="${sql.user}"
+				 password="${sql.password}"
+				 src="${db.dir}/create_tables.sql"
+				 autocommit="True">
+			</sql>
+		</target>
+
+		<target name="drop_db">
+			<sql classpath="${sql.classpath}"
+				 driver="${sql.driver}"
+				 url="${sql.url}"
+				 userid="${sql.user}"
+				 password="${sql.password}"
+				 src="${db.dir}/drop_db.sql"
+				 autocommit="True">
+			</sql>
+		</target>
+
+		<target name="drop_tables">
+			<sql classpath="${sql.classpath}"
+				 driver="${sql.driver}"
+				 url="${sql.url}"
+				 userid="${sql.user}"
+				 password="${sql.password}"
+				 src="${db.dir}/drop_tables.sql"
+				 autocommit="True">
+			</sql>
+		</target>
+
+		<target name="make_db" depends="drop_tables,drop_db,create_db,create_tables,add_elems"/>
+
+</project>

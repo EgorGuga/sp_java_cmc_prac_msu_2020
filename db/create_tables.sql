@@ -1,0 +1,93 @@
+CREATE TABLE Student (
+	Student_ID SERIAL PRIMARY KEY,
+    Full_name VARCHAR(100) NOT NULL,
+    Year_of_study INTEGER CHECK (Year_of_study > 0 AND Year_of_study < 10)  NOT NULL,
+    Group_ID BIGINT UNSIGNED NOT NULL,
+    Flow_ID BIGINT UNSIGNED NOT NULL
+);
+
+CREATE TABLE SGroup (
+	Group_ID SERIAL PRIMARY KEY,
+    Group_number INTEGER CHECK (Group_number > 0 AND Group_number <= 1000) NOT NULL,
+    Flow_ID BIGINT UNSIGNED NOT NULL
+);
+
+CREATE TABLE Flow (
+	Flow_ID SERIAL PRIMARY KEY,
+    Flow_number INTEGER CHECK (Flow_number > 0 AND Flow_number <= 5) NOT NULL
+);
+
+CREATE TABLE Professor (
+	Professor_ID SERIAL PRIMARY KEY,
+    Full_name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Class (
+	Class_ID SERIAL PRIMARY KEY,
+    Course_ID BIGINT UNSIGNED NOT NULL,
+    Professor_ID BIGINT UNSIGNED NOT NULL,
+    Lecture_hall_ID BIGINT UNSIGNED NOT NULL,
+    Day_of_the_week ENUM('Пн', 'Вт', 'Ср', 'Чт', 'Пт'),
+	Start_time TIME CHECK (Start_time >= '08:00:00' AND Start_time <= '18:00:00'),
+    End_time TIME CHECK (End_time >= '08:00:00' AND End_time <= '20:00:00')
+);
+
+ALTER TABLE Class ADD CONSTRAINT valid_time CHECK (Start_time < End_time);
+
+CREATE TABLE Course (
+	Course_ID SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Coverage ENUM ('Поток', 'Группа', 'Спец. курс'),
+    Intensity INTEGER CHECK (Intensity > 0 AND Intensity < 20) NOT NULL,
+	Year_of_study INTEGER CHECK (Year_of_study > 0 AND Year_of_study < 10),
+    Year YEAR CHECK (Year >= 2000 AND Year <= 2100)NOT NULL,
+    Active BOOL NOT NULL
+);
+
+CREATE TABLE Lecture_hall (
+	Lecture_hall_ID SERIAL PRIMARY KEY,
+    NUMBER VARCHAR(20) NOT NULL,
+    Capacity INTEGER CHECK (Capacity > 0 AND Capacity < 2000) NOT NULL
+);
+
+CREATE TABLE SJournal (
+	Student_ID BIGINT UNSIGNED NOT NULL,
+    Class_ID BIGINT UNSIGNED NOT NULL, 
+	PRIMARY KEY (Student_ID, Class_ID)
+);
+
+CREATE TABLE WJournal (
+	Professor_ID BIGINT UNSIGNED NOT NULL,
+    Course_ID BIGINT UNSIGNED NOT NULL, 
+	PRIMARY KEY (Professor_ID, Course_ID)
+);
+
+ALTER TABLE Student
+	ADD FOREIGN KEY (Group_ID)
+		REFERENCES SGroup(Group_ID) ON DELETE RESTRICT ON UPDATE CASCADE,
+	ADD FOREIGN KEY (Flow_ID)
+		REFERENCES Flow(Flow_ID) ON DELETE RESTRICT ON UPDATE CASCADE;
+    
+ALTER TABLE SGroup ADD
+	FOREIGN KEY (Flow_ID)
+	REFERENCES Flow(Flow_ID) ON DELETE RESTRICT ON UPDATE CASCADE;
+    
+ALTER TABLE Class
+	ADD FOREIGN KEY (Course_ID)
+		REFERENCES Course(Course_ID) ON DELETE RESTRICT ON UPDATE CASCADE,
+	ADD FOREIGN KEY (Professor_ID)
+		REFERENCES Professor(Professor_ID) ON DELETE RESTRICT ON UPDATE CASCADE,
+	ADD FOREIGN KEY (Lecture_hall_ID)
+		REFERENCES Lecture_hall(Lecture_hall_ID) ON DELETE RESTRICT ON UPDATE CASCADE;
+    
+ALTER TABLE SJournal
+	ADD FOREIGN KEY (Student_ID)
+		REFERENCES Student(Student_ID) ON DELETE RESTRICT ON UPDATE CASCADE,
+	ADD FOREIGN KEY (Class_ID)
+		REFERENCES Class(Class_ID) ON DELETE RESTRICT ON UPDATE CASCADE;
+    
+ALTER TABLE WJournal
+	ADD FOREIGN KEY (Professor_ID)
+		REFERENCES Professor(Professor_ID) ON DELETE RESTRICT ON UPDATE CASCADE,
+	ADD FOREIGN KEY (Course_ID)
+		REFERENCES Course(Course_ID) ON DELETE RESTRICT ON UPDATE CASCADE;
