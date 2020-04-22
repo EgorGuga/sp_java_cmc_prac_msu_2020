@@ -28,8 +28,8 @@ CREATE TABLE Class (
     Professor_ID BIGINT UNSIGNED NOT NULL,
     Lecture_hall_ID BIGINT UNSIGNED NOT NULL,
     Day_of_the_week ENUM('Пн', 'Вт', 'Ср', 'Чт', 'Пт'),
-	Start_time TIME CHECK (Start_time >= '08:00:00' AND Start_time <= '18:00:00'),
-    End_time TIME CHECK (End_time >= '08:00:00' AND End_time <= '20:00:00')
+	Start_time TIME NOT NULL,
+    End_time TIME NOT NULL
 );
 
 ALTER TABLE Class ADD CONSTRAINT valid_time CHECK (Start_time < End_time);
@@ -88,6 +88,6 @@ ALTER TABLE SJournal
     
 ALTER TABLE WJournal
 	ADD FOREIGN KEY (Professor_ID)
-		REFERENCES Professor(Professor_ID) ON DELETE RESTRICT ON UPDATE CASCADE,
+		REFERENCES Professor(Professor_ID) ON DELETE RESTRICT ON  UPDATE CASCADE,
 	ADD FOREIGN KEY (Course_ID)
 		REFERENCES Course(Course_ID) ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="Entities.Clazz" table="Class" schema="db">
+        <id name="classId">
+            <column name="Class_ID" sql-type="bigint unsigned"/>
+        </id>
+        <property name="dayOfTheWeek">
+            <column name="Day_of_the_week" sql-type="enum('пн', 'вт', 'ср', 'чт', 'пт')" not-null="false"/>
+        </property>
+        <property name="startTime">
+            <column name="Start_time" sql-type="time" not-null="true"/>
+        </property>
+        <property name="endTime">
+            <column name="End_time" sql-type="time" not-null="true"/>
+        </property>
+        <many-to-one name="courseByCourseId" class="Entities.Course">
+            <column name="Course_ID"/>
+        </many-to-one>
+        <many-to-one name="professorByProfessorId" class="Entities.Professor">
+            <column name="Professor_ID"/>
+        </many-to-one>
+        <many-to-one name="lectureHallByLectureHallId" class="Entities.LectureHall">
+            <column name="Lecture_hall_ID"/>
+        </many-to-one>
+        <set name="sJournalsByClassId" inverse="true">
+            <key>
+                <column name="Class_ID"/>
+            </key>
+            <one-to-many not-found="ignore" class="Entities.SJournal"/>
+        </set>
+    </class>
+    <class name="Entities.Course" table="Course" schema="db">
+        <id name="courseId">
+            <column name="Course_ID" sql-type="bigint unsigned"/>
+        </id>
+        <property name="name">
+            <column name="Name" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="coverage">
+            <column name="Coverage" sql-type="enum('поток', 'группа', 'спец. курс')" not-null="true"/>
+        </property>
+        <property name="intensity">
+            <column name="Intensity" sql-type="int"/>
+        </property>
+        <property name="yearOfStudy">
+            <column name="Year_of_study" sql-type="int" not-null="false"/>
+        </property>
+        <property name="year">
+            <column name="Year" sql-type="year"/>
+        </property>
+        <property name="active">
+            <column name="Active" sql-type="tinyint(1)"/>
+        </property>
+        <set name="classesByCourseId" inverse="true">
+            <key>
+                <column name="Course_ID"/>
+            </key>
+            <one-to-many not-found="ignore" class="Entities.Clazz"/>
+        </set>
+        <set name="wJournalsByCourseId" inverse="true">
+            <key>
+                <column name="Course_ID"/>
+            </key>
+            <one-to-many not-found="ignore" class="Entities.WJournal"/>
+        </set>
+    </class>
+    <class name="Entities.Flow" table="Flow" schema="db">
+        <id name="flowId">
+            <column name="Flow_ID" sql-type="bigint unsigned"/>
+        </id>
+        <property name="flowNumber">
+            <column name="Flow_number" sql-type="int"/>
+        </property>
+        <set name="sGroupsByFlowId" inverse="true">
+            <key>
+                <column name="Flow_ID"/>
+            </key>
+            <one-to-many not-found="ignore" class="Entities.SGroup"/>
+        </set>
+        <set name="studentsByFlowId" inverse="true">
+            <key>
+                <column name="Flow_ID"/>
+            </key>
+            <one-to-many not-found="ignore" class="Entities.Student"/>
+        </set>
+    </class>
+    <class name="Entities.LectureHall" table="Lecture_hall" schema="db">
+        <id name="lectureHallId">
+            <column name="Lecture_hall_ID" sql-type="bigint unsigned"/>
+        </id>
+        <property name="number">
+            <column name="NUMBER" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="capacity">
+            <column name="Capacity" sql-type="int"/>
+        </property>
+        <set name="classesByLectureHallId" inverse="true">
+            <key>
+                <column name="Lecture_hall_ID"/>
+            </key>
+            <one-to-many not-found="ignore" class="Entities.Clazz"/>
+        </set>
+    </class>
+    <class name="Entities.Professor" table="Professor" schema="db">
+        <id name="professorId">
+            <column name="Professor_ID" sql-type="bigint unsigned"/>
+        </id>
+        <property name="fullName">
+            <column name="Full_name" sql-type="varchar(100)" length="100"/>
+        </property>
+        <set name="classesByProfessorId" inverse="true">
+            <key>
+                <column name="Professor_ID"/>
+            </key>
+            <one-to-many not-found="ignore" class="Entities.Clazz"/>
+        </set>
+        <set name="wJournalsByProfessorId" inverse="true">
+            <key>
+                <column name="Professor_ID"/>
+            </key>
+            <one-to-many not-found="ignore" class="Entities.WJournal"/>
+        </set>
+    </class>
+    <class name="Entities.SGroup" table="SGroup" schema="db">
+        <id name="groupId">
+            <column name="Group_ID" sql-type="bigint unsigned"/>
+        </id>
+        <property name="groupNumber">
+            <column name="Group_number" sql-type="int"/>
+        </property>
+        <many-to-one name="flowByFlowId" class="Entities.Flow">
+            <column name="Flow_ID"/>
+        </many-to-one>
+        <set name="studentsByGroupId" inverse="true">
+            <key>
+                <column name="Group_ID"/>
+            </key>
+            <one-to-many not-found="ignore" class="Entities.Student"/>
+        </set>
+    </class>
+    <class name="Entities.SJournal" table="SJournal" schema="db">
+        <composite-id mapped="true" class="Entities.SJournalPK">
+            <key-property name="studentId">
+                <column name="Student_ID" sql-type="bigint unsigned"/>
+            </key-property>
+            <key-property name="classId">
+                <column name="Class_ID" sql-type="bigint unsigned"/>
+            </key-property>
+        </composite-id>
+        <many-to-one name="studentByStudentId" class="Entities.Student" insert="false" update="false">
+            <column name="Student_ID"/>
+        </many-to-one>
+        <many-to-one name="classByClassId" class="Entities.Clazz" insert="false" update="false">
+            <column name="Class_ID"/>
+        </many-to-one>
+    </class>
+    <class name="Entities.Student" table="Student" schema="db">
+        <id name="studentId">
+            <column name="Student_ID" sql-type="bigint unsigned"/>
+        </id>
+        <property name="fullName">
+            <column name="Full_name" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="yearOfStudy">
+            <column name="Year_of_study" sql-type="int"/>
+        </property>
+        <many-to-one name="sGroupByGroupId" class="Entities.SGroup">
+            <column name="Group_ID"/>
+        </many-to-one>
+        <many-to-one name="flowByFlowId" class="Entities.Flow">
+            <column name="Flow_ID"/>
+        </many-to-one>
+        <set name="sJournalsByStudentId" inverse="true">
+            <key>
+                <column name="Student_ID"/>
+            </key>
+            <one-to-many not-found="ignore" class="Entities.SJournal"/>
+        </set>
+    </class>
+    <class name="Entities.WJournal" table="WJournal" schema="db">
+        <composite-id mapped="true" class="Entities.WJournalPK">
+            <key-property name="professorId">
+                <column name="Professor_ID" sql-type="bigint unsigned"/>
+            </key-property>
+            <key-property name="courseId">
+                <column name="Course_ID" sql-type="bigint unsigned"/>
+            </key-property>
+        </composite-id>
+        <many-to-one name="professorByProfessorId" class="Entities.Professor" insert="false" update="false">
+            <column name="Professor_ID"/>
+        </many-to-one>
+        <many-to-one name="courseByCourseId" class="Entities.Course" insert="false" update="false">
+            <column name="Course_ID"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

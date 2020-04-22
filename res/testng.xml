@@ -1,0 +1,7 @@
+<suite name="Suite" verbose="1">
+  <test name="Tests">
+    <packages>
+      <package name="dao.test"/>
+   </packages>
+ </test>
+</suite>
