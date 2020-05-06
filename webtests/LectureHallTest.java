@@ -70,4 +70,11 @@ public class LectureHallTest {
         String message = "Аудитория успешно изменена";
         Assert.assertEquals(message, driver.findElement(By.xpath("/html/body/p[2]")).getText());
     }
+
+    @Test
+    public void ViewLectureHallTimetable() {
+        driver.get("http://localhost:8080/webapp");
+        driver.findElement(By.linkText("Информация об аудиториях")).click();
+        driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td[3]/a")).click();
+    }
 }

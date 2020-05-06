@@ -55,4 +55,17 @@ public class ProfessorTest {
         Assert.assertEquals(message, driver.findElement(By.xpath("/html/body/p[2]")).getText());
     }
 
+    @Test
+    public void ViewProfessorTimetable() {
+        driver.get("http://localhost:8080/webapp");
+        driver.findElement(By.linkText("Информация о преподавателях")).click();
+        driver.findElement(By.xpath("/html/body/table/tbody/tr[3]/td[2]/a")).click();
+    }
+
+    @Test
+    public void ViewProfessorCourses() {
+        driver.get("http://localhost:8080/webapp");
+        driver.findElement(By.linkText("Информация о преподавателях")).click();
+        driver.findElement(By.xpath("/html/body/table/tbody/tr[3]/td[2]/a")).click();
+    }
 }

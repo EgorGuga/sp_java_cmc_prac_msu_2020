@@ -43,4 +43,11 @@ public class ProfessorCourseTest {
         String message2 = "Запись о данном курсе уже имеется и преподавателя";
         Assert.assertEquals(message2, driver.findElement(By.xpath("/html/body/p[2]")).getText());
     }
+
+    @Test
+    public void ViewProfessorCourse() {
+        driver.get("http://localhost:8080/webapp");
+        driver.findElement(By.linkText("Информация о преподавателях")).click();
+        driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td[3]/a")).click();
+    }
 }

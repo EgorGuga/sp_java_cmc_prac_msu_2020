@@ -130,4 +130,23 @@ public class StudentTest {
         String message = "Данные о студенте успешно изменены";
         Assert.assertEquals(message, driver.findElement(By.xpath("/html/body/p[2]")).getText());
     }
+
+    @Test
+    public void ViewStudentIndividualTimetable() {
+        driver.get("http://localhost:8080/webapp");
+        driver.findElement(By.linkText("Информация о студентах")).click();
+        driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td[5]/a")).click();
+
+    }
+
+    @Test
+    public void ViewStudentGroupTimetable() {
+        driver.get("http://localhost:8080/webapp");
+        driver.findElement(By.linkText("Информация о студентах")).click();
+        driver.findElement(By.linkText("Поиск по группе")).click();
+        Select group = new Select(driver.findElement(By.id("groupId")));
+        group.selectByVisibleText("101");
+        driver.findElement(By.xpath("//*[@id=\"group\"]/table/tbody/tr[2]/td/input")).click();
+        driver.findElement(By.linkText("Расписание группы")).click();
+    }
 }
