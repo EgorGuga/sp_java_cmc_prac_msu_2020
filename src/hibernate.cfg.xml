@@ -12,6 +12,7 @@
         <property name="show_sql">true</property>
         <property name="hibernate.ejb.metamodel.population">disabled</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="connection.pool_size">100</property>
 
         <mapping resource="Entities.hbm.xml"/>
     </session-factory>

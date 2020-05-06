@@ -21,7 +21,6 @@ public class SGroupDao {
     public static SGroup findSGroupById(long id) {
         session = HibernateFactory.openSession();
         SGroup SG = session.get(SGroup.class, id);
-        session.close();
         return SG;
     }
 }

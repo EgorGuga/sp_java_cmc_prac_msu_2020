@@ -47,13 +47,13 @@ public class CourseDaoTest {
         C.setIntensity(2);
         updateCourse(C);
         Course C2 = findCourseById(6);
-        Assert.assertEquals(C2.getIntensity(), 2);
+        Assert.assertEquals(C2.getIntensity(), (Integer)2);
 
         Course C3 = findCourseById(6);
         C3.setIntensity(-3);
         updateCourse(C);
         Course C4 = findCourseById(6);
-        Assert.assertEquals(C4.getIntensity(), 2);
+        Assert.assertEquals(C4.getIntensity(), (Integer)2);
     }
 
     @Test(dependsOnMethods = {"testUpdateCourse"})

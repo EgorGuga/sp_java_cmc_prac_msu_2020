@@ -15,7 +15,7 @@ public class FlowDaoTest {
     @Test
     public void testFindFlowAll() {
         List<Flow> L = findFlowAll();
-        Assert.assertEquals(6, L.size());
+        Assert.assertEquals(3, L.size());
     }
 
     @Test

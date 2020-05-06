@@ -1,10 +1,6 @@
 INSERT INTO Flow (Flow_ID, Flow_Number) VALUES (Default, 1);
 INSERT INTO Flow (Flow_ID, Flow_Number) VALUES (Default, 2);
 INSERT INTO Flow (Flow_ID, Flow_Number) VALUES (Default, 3);
-INSERT INTO Flow (Flow_ID, Flow_Number) VALUES (Default, 1);
-INSERT INTO Flow (Flow_ID, Flow_Number) VALUES (Default, 2);
-INSERT INTO Flow (Flow_ID, Flow_Number) VALUES (Default, 3);
-
 
 INSERT INTO SGroup (Group_ID, Group_number, Flow_ID) VALUES (Default, 101, 1);
 INSERT INTO SGroup (Group_ID, Group_number, Flow_ID) VALUES (Default, 102, 1);
@@ -37,24 +33,24 @@ INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VA
 INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Крючкова Светлана Николаевна', 1, 6, 3);
 INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Федорук Иван Степанович', 1, 6, 3);
 INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Стукалов Сергей Алексеевич', 1, 6, 3);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Моисеенко Йосып Иванович', 2, 7, 4);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Тетерин Фёдор Сергеевич', 2, 7, 4);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Медяник Заур Фёдорович', 2, 7, 4);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Егоров Чеслав Виталиевич', 2, 8, 4);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Панфилов Заур Данилович', 2, 8, 4);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Желиба Жерар Сергеевич', 2, 8, 4);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Громов Родион Андреевич', 2, 9, 5);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Ефремов Леонид Алексеевич', 2, 9, 5);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Таранец Рафаил Анатолиевич', 2, 9, 5);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Федосеев Цезарь Львович', 2, 10, 5);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Алчевский Зенон Анатолиевич', 2, 10, 5);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Романенко Назар Данилович', 2, 10, 5);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Васильев Богдан Александрович', 2, 11, 6);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Хохлов Данила Борисович', 2, 11, 6);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Панов Юлиан Евгеньевич', 2, 11, 6);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Панов Огюст Сергеевич', 2, 12, 6);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Белоусов Ростислав Петрович', 2, 12, 6);
-INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Корнилов Харитон Данилович', 2, 12, 6);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Моисеенко Йосып Иванович', 2, 7, 1);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Тетерин Фёдор Сергеевич', 2, 7, 1);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Медяник Заур Фёдорович', 2, 7, 1);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Егоров Чеслав Виталиевич', 2, 8, 1);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Панфилов Заур Данилович', 2, 8, 1);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Желиба Жерар Сергеевич', 2, 8, 1);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Громов Родион Андреевич', 2, 9, 2);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Ефремов Леонид Алексеевич', 2, 9, 2);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Таранец Рафаил Анатолиевич', 2, 9, 2);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Федосеев Цезарь Львович', 2, 10, 2);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Алчевский Зенон Анатолиевич', 2, 10, 2);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Романенко Назар Данилович', 2, 10, 2);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Васильев Богдан Александрович', 2, 11, 3);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Хохлов Данила Борисович', 2, 11, 3);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Панов Юлиан Евгеньевич', 2, 11, 3);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Панов Огюст Сергеевич', 2, 12, 3);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Белоусов Ростислав Петрович', 2, 12, 3);
+INSERT INTO Student (Student_ID, Full_Name, Year_of_study, Group_ID, Flow_ID) VALUES (Default, 'Корнилов Харитон Данилович', 2, 12, 3);
 
 INSERT INTO Professor (Professor_ID, Full_Name) VALUES (Default, 'Стегайло Харитон Брониславович');
 INSERT INTO Professor (Professor_ID, Full_Name) VALUES (Default, 'Лобанов Пётр Евгеньевич');

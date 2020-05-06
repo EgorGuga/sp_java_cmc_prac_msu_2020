@@ -17,14 +17,21 @@ public class ClazzDao {
         session = HibernateFactory.openSession();
         List<Clazz> l = session.createCriteria(Clazz.class).addOrder(Order.asc("classId")).list();
         if (l.size() == 0) return null;
-        session.close();
+
         return l;
     }
 
     public static Clazz findClazzById(long id) {
         session = HibernateFactory.openSession();
         Clazz C = session.get(Clazz.class, id);
-        session.close();
+        return C;
+    }
+
+    public static Clazz findClazzById(long id, boolean close) {
+        session = HibernateFactory.openSession();
+        Clazz C = session.get(Clazz.class, id);
+        if (close)
+            session.close();
         return C;
     }
 
@@ -41,10 +48,9 @@ public class ClazzDao {
                 .list();
         l.retainAll(l2);
         if (l.size() == 0) return null;
-        session.close();
         return l;
     }
-
+    /*
     public static List<Clazz> findClazzByCourse(long id) {
         session = HibernateFactory.openSession();
         List<Clazz> l = session.createCriteria(Clazz.class).addOrder(Order.asc("dayOfTheWeek")).addOrder(Order.asc("startTime"))
@@ -53,7 +59,7 @@ public class ClazzDao {
         if (l.size() == 0) return null;
         session.close();
         return l;
-    }
+    }*/
 
     public static List<Clazz> findClazzByLectureHall(long id) {
         session = HibernateFactory.openSession();
@@ -61,13 +67,12 @@ public class ClazzDao {
                 .createCriteria("lectureHallByLectureHallId").add(Restrictions.eq("lectureHallId", id))
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
         List<Clazz> l2 = session.createCriteria(Clazz.class)
-                .addOrder(Order.asc("dayOfTheWeek")).addOrder(Order.asc("startTime"))
+                .addOrder(Order.asc("startTime"))
                 .createCriteria("courseByCourseId").add(Restrictions.eq("active", (byte)1))
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
                 .list();
         l.retainAll(l2);
         if (l.size() == 0) return null;
-        session.close();
         return l;
     }
 
@@ -79,14 +84,13 @@ public class ClazzDao {
         List<Clazz> l2 = session.createCriteria(Clazz.class)
                 .addOrder(Order.asc("dayOfTheWeek")).addOrder(Order.asc("startTime"))
                 .createCriteria("courseByCourseId").add(Restrictions.eq("active", (byte)1))
-                .add(Restrictions.ne("coverage", "спец. курс")).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
                 .list();
         l.retainAll(l2);
         if (l.size() == 0) return null;
-        session.close();
         return l;
     }
-
+    /*
     public static List<Clazz> findClazzByYOS(int YOS) {
         session = HibernateFactory.openSession();
         List<Clazz> l = session.createCriteria(Clazz.class)
@@ -99,9 +103,8 @@ public class ClazzDao {
                 .list();
         l.retainAll(l2);
         if (l.size() == 0) return null;
-        session.close();
         return l;
-    }
+    }*/
 
     public static List<Clazz> findClazzByGroup(int GroupNumber) {
         session = HibernateFactory.openSession();
@@ -115,14 +118,14 @@ public class ClazzDao {
                 .list();
         l.retainAll(l2);
         if (l.size() == 0) return null;
-        session.close();
         return l;
     }
 
-    public static List<Clazz> findClazzByFlow(int FlowNumber) {
+    public static List<Clazz> findClazzByYosAndFlow(int FlowNumber, int YOS) {
         session = HibernateFactory.openSession();
         List<Clazz> l = session.createCriteria(Clazz.class)
-                .createCriteria("sJournalsByClassId").createCriteria("studentByStudentId").createCriteria("flowByFlowId")
+                .createCriteria("sJournalsByClassId").createCriteria("studentByStudentId")
+                .add(Restrictions.eq("yearOfStudy", YOS)).createCriteria("flowByFlowId")
                 .add(Restrictions.eq("flowNumber", FlowNumber)).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
         List<Clazz> l2 = session.createCriteria(Clazz.class)
                 .addOrder(Order.asc("dayOfTheWeek")).addOrder(Order.asc("startTime"))
@@ -132,7 +135,6 @@ public class ClazzDao {
                 .list();
         l.retainAll(l2);
         if (l.size() == 0) return null;
-        session.close();
         return l;
     }
 
@@ -153,7 +155,7 @@ public class ClazzDao {
         session = HibernateFactory.openSession();
         session.beginTransaction();
         try {
-            session.update(C);
+            session.merge(C);
             session.getTransaction().commit();
         } catch (PersistenceException Exc) {
             session.getTransaction().rollback();
@@ -163,7 +165,7 @@ public class ClazzDao {
     }
 
     public static void deleteClazzById(long Id) {
-        Clazz C = findClazzById(Id);
+        Clazz C = findClazzById(Id, true);
         if (C == null) return;
         session = HibernateFactory.openSession();
         session.beginTransaction();

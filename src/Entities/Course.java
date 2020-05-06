@@ -2,13 +2,14 @@ package Entities;
 
 import java.util.Set;
 
+
 public class Course {
     private long courseId;
     private String name;
     private String coverage;
-    private int intensity;
+    private Integer intensity;
     private Integer yearOfStudy;
-    private int year;
+    private Integer year;
     private byte active;
     private Set<Clazz> classesByCourseId;
     private Set<WJournal> wJournalsByCourseId;
@@ -37,15 +38,15 @@ public class Course {
         this.coverage = coverage;
     }
 
-    public int getIntensity() {
+    public Integer getIntensity() {
         return intensity;
     }
 
-    public void setIntensity(int intensity) {
+    public void setIntensity(Integer intensity) {
         this.intensity = intensity;
     }
 
-    public int getYearOfStudy() {
+    public Integer getYearOfStudy() {
         return yearOfStudy;
     }
 
@@ -53,11 +54,11 @@ public class Course {
         this.yearOfStudy = yearOfStudy;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 

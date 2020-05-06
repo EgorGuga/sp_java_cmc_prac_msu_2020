@@ -25,7 +25,6 @@ public class WJournalDao {
                 .add(Restrictions.eq("professorId", id))
                 .addOrder(Order.asc("courseId")).list();
         if (l.size() == 0) return null;
-        session.close();
         return l;
     }
 

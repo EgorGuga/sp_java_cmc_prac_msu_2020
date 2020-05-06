@@ -6,7 +6,7 @@ import java.util.Set;
 public class Student {
     private long studentId;
     private String fullName;
-    private int yearOfStudy;
+    private Integer yearOfStudy;
     private Set<SJournal> sJournalsByStudentId;
     private SGroup sGroupByGroupId;
     private Flow flowByFlowId;
@@ -27,11 +27,11 @@ public class Student {
         this.fullName = fullName;
     }
 
-    public int getYearOfStudy() {
+    public Integer getYearOfStudy() {
         return yearOfStudy;
     }
 
-    public void setYearOfStudy(int yearOfStudy) {
+    public void setYearOfStudy(Integer yearOfStudy) {
         this.yearOfStudy = yearOfStudy;
     }
 

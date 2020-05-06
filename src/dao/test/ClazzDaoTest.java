@@ -43,7 +43,7 @@ public class ClazzDaoTest {
         List<Clazz> L2 = findClazzByStudent(100);
         Assert.assertEquals(L2, null);
     }
-
+    /*
     @Test
     public void testFindClazzByCourse() {
         List<Clazz> L = findClazzByCourse(2);
@@ -56,7 +56,7 @@ public class ClazzDaoTest {
 
         List<Clazz> L2 = findClazzByCourse(100);
         Assert.assertEquals(L2, null);
-    }
+    }*/
 
     @Test
     public void testFindClazzByLectureHall() {
@@ -85,7 +85,7 @@ public class ClazzDaoTest {
         List<Clazz> L2 = findClazzByProfessor(100);
         Assert.assertEquals(L2, null);
     }
-
+    /*
     @Test
     public void testFindClazzByYOF() {
         List<Clazz> L = findClazzByYOS(1);
@@ -98,7 +98,7 @@ public class ClazzDaoTest {
 
         List<Clazz> L2 = findClazzByYOS(100);
         Assert.assertEquals(L2, null);
-    }
+    }*/
 
     @Test
     public void testFindClazzByGroup() {
@@ -115,8 +115,8 @@ public class ClazzDaoTest {
     }
 
     @Test
-    public void testFindClazzByFlow() {
-        List<Clazz> L = findClazzByFlow(1);
+    public void testFindClazzByYosAndFlow() {
+        List<Clazz> L = findClazzByYosAndFlow(1, 1);
         Set<Long> S = new HashSet<Long>();
         for(Clazz b : L)
             S.add(b.getClassId());
@@ -124,8 +124,14 @@ public class ClazzDaoTest {
         S2.add((long) 1); S2.add((long) 2);
         Assert.assertEquals(S2, S);
 
-        List<Clazz> L2 = findClazzByGroup(100);
+        List<Clazz> L2 = findClazzByYosAndFlow(100, 100);
         Assert.assertEquals(L2, null);
+
+        List<Clazz> L3 = findClazzByYosAndFlow(1, 100);
+        Assert.assertEquals(L3, null);
+
+        List<Clazz> L4 = findClazzByYosAndFlow(100, 100);
+        Assert.assertEquals(L4, null);
     }
 
     @Test(dependsOnMethods = {"testFindClazzAll"})

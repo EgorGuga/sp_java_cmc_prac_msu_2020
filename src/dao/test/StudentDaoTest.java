@@ -82,7 +82,7 @@ public class StudentDaoTest {
     @Test(dependsOnMethods = {"testFindStudentAll"})
     public void testPersistStudent() {
         Student C = new Student(); C.setStudentId(37); C.setFullName("Сысоев Борис Иванович");
-        C.setYearOfStudy(2); C.setFlowByFlowId(findFlowById(6)); C.setsGroupByGroupId(findSGroupById(12));
+        C.setYearOfStudy(2); C.setFlowByFlowId(findFlowById(3)); C.setsGroupByGroupId(findSGroupById(12));
         persistStudent(C);
         Student C2 = findStudentById(37);
         Assert.assertNotEquals(C2, null);

@@ -16,7 +16,6 @@ public class StudentDao {
     public static List<Student> findStudentAll() {
         session = HibernateFactory.openSession();
         List<Student> l = session.createCriteria(Student.class).addOrder(Order.asc("sGroupByGroupId")).addOrder(Order.desc("fullName")).list();
-        session.close();
         return l;
     }
 
@@ -40,7 +39,6 @@ public class StudentDao {
         List<Student> l = session.createCriteria(Student.class).add(Restrictions.eq("yearOfStudy", YOS)).addOrder(Order.asc("sGroupByGroupId")).addOrder(Order.desc("fullName"))
                 .createCriteria("flowByFlowId").add(Restrictions.eq("flowNumber", FlowNumber)).list();
         if (l.size() == 0) return null;
-        session.close();
         return l;
     }
 
@@ -49,7 +47,6 @@ public class StudentDao {
         List<Student> l = session.createCriteria(Student.class).addOrder(Order.desc("fullName"))
                 .createCriteria("sGroupByGroupId").add(Restrictions.eq("groupNumber", GroupNumber)).list();
         if (l.size() == 0) return null;
-        session.close();
         return l;
     }
 

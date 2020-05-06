@@ -13,7 +13,7 @@ public class CourseDao {
 
     public static List<Course> findCourseAll() {
         session = HibernateFactory.openSession();
-        List<Course> l = session.createCriteria(Course.class).addOrder(Order.asc("name")).addOrder(Order.asc("year")).addOrder(Order.asc("yearOfStudy")).list();
+        List<Course> l = session.createCriteria(Course.class).addOrder(Order.asc("year")).addOrder(Order.asc("name")).addOrder(Order.asc("yearOfStudy")).list();
         if (l.size() == 0) return null;
         session.close();
         return l;
